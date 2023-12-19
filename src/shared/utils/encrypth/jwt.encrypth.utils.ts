@@ -10,7 +10,6 @@ export const generateToken = (data: any): string | undefined => {
     }
 
     const jwtSecret = process.env.JTW_SECRET || ''
-    console.timeLog('jwtScret', jwtSecret)
     const token = jwt.sign(payload, jwtSecret, options)
     return token
 }

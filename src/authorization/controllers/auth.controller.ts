@@ -12,10 +12,11 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
             res.status(500).send('Internal Server Error')
             return
         }
-
+        const isAdmin = user.rol == 'admin' ? true : false;
+ 
         emailAndPasswordMatch(user.password, authData.password)
         const accessToken = generateToken(user)
-        res.status(201).send({accessToken, userId: user._id})
+        res.status(201).send({accessToken, userId: user._id, isAdmin})
     } catch (error: any) {
         if(error?.message == 'Connect refused, bad credentials'){
             res.status(400).send(error.message)
